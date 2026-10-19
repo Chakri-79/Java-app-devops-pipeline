@@ -2,14 +2,14 @@ version: "3.9"
 
 services:
   devopsdb:
-    image: chakradhar098/java-app:app
+    image: chakradhar098/java-app:db
     ports:
       - "3306:3306"
     deploy:
       replicas: 1
 
   application:
-    image: chakradhar098/java-app:db
+    image: chakradhar098/java-app:app
     ports:
       - "1234:8080"
     depends_on:

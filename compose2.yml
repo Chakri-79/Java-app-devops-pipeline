@@ -1,0 +1,26 @@
+version: "3.9"
+
+services:
+  devopsdb:
+    image: chakradhar098/java-app:db
+    ports:
+      - "3306:3306"
+    deploy:
+      replicas: 1
+    networks:
+      - mynetwork
+
+  application:
+    image: chakradhar098/java-app:app
+    ports:
+      - "1111:8080"
+    deploy:
+      replicas: 3
+    depends_on:
+      - devopsdb
+    networks:
+      - mynetwork
+
+networks:
+  mynetwork:
+    driver: overlay

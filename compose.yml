@@ -5,15 +5,12 @@ services:
     image: chakradhar098/java-app:app
     ports:
       - "3306:3306"
-    deploy:
-      replicas: 1
+    
     
   application:
     image: chakradhar098/java-app:db
     ports:
-      - "1234:8080"
-    deploy:
-      replicas: 3
+      - "1234:8080
     depends_on:
       - devopsdb
     

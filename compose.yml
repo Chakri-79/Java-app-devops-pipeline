@@ -11,7 +11,7 @@ services:
   application:
     image: chakradhar098/java-app:db
     ports:
-      - "1111:8080"
+      - "1234:8080"
     deploy:
       replicas: 3
     depends_on:

@@ -1,9 +1,11 @@
+```yaml
 ---
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: devopsapp
+  name: devopsdb
 spec:
+  serviceName: devopsdb
   replicas: 2
   selector:
     matchLabels:
@@ -18,12 +20,14 @@ spec:
           image: chakradhar098/k8sdeployment:db
           ports:
             - containerPort: 3306
+          volumeMounts:
+            - name: mysql-storage
+              mountPath: /var/lib/mysql
       imagePullSecrets:
         - name: flm
-
-
-
-
+      volumes:
+        - name: mysql-storage
+          emptyDir: {}
 ---
 apiVersion: v1
 kind: Service
@@ -36,3 +40,4 @@ spec:
   ports:
     - port: 3306
       targetPort: 3306
+```

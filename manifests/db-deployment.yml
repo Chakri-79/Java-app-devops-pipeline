@@ -1,5 +1,4 @@
-```yaml
----
+
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
@@ -15,6 +14,8 @@ spec:
       labels:
         app: db
     spec:
+      imagePullSecrets:
+        - name: flm
       containers:
         - name: cont-1
           image: chakradhar098/k8sdeployment:db
@@ -23,11 +24,10 @@ spec:
           volumeMounts:
             - name: mysql-storage
               mountPath: /var/lib/mysql
-      imagePullSecrets:
-        - name: flm
       volumes:
         - name: mysql-storage
           emptyDir: {}
+
 ---
 apiVersion: v1
 kind: Service
@@ -38,6 +38,6 @@ spec:
   selector:
     app: db
   ports:
-    - port: 3306
+    - name: mysql
+      port: 3306
       targetPort: 3306
-```
